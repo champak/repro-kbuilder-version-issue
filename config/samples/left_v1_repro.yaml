@@ -1,0 +1,7 @@
+apiVersion: left.play.zone/v1
+kind: Repro
+metadata:
+  name: repro-sample
+spec:
+  # Add fields here
+  foo: bar

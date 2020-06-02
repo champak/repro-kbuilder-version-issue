@@ -1,0 +1,26 @@
+# permissions to do edit reproes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: repro-editor-role
+rules:
+- apiGroups:
+  - left.play.zone
+  resources:
+  - reproes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - left.play.zone
+  resources:
+  - reproes/status
+  verbs:
+  - get
+  - patch
+  - update
