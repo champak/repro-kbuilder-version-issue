@@ -1,7 +1,16 @@
 apiVersion: left.play.zone/v1
 kind: Repro
 metadata:
-  name: repro-sample
+  name: repro-sample-v1
 spec:
   # Add fields here
-  foo: bar
+  foo: bar-v1
+  graph:
+    dummy: "isthere-v1"
+    pod:
+      metadata:
+        name: mia-pod-name-v1
+      spec:
+        containers:
+        - name: a-container-v1
+          image: busybox

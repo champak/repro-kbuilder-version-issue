@@ -24,6 +24,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	leftv1alpha1 "conv/api/v1alpha1"
+	debugLog "log"
 )
 
 // ReproReconciler reconciles a Repro object
@@ -37,10 +38,21 @@ type ReproReconciler struct {
 // +kubebuilder:rbac:groups=left.play.zone,resources=reproes/status,verbs=get;update;patch
 
 func (r *ReproReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	_ = context.Background()
+	ctx := context.Background()
 	_ = r.Log.WithValues("repro", req.NamespacedName)
 
+	var reproObj leftv1alpha1.Repro
+
 	// your logic here
+	debugLog.Printf(" Entry: Reconcile req %s NS %s \n", req.NamespacedName, req.Namespace)
+
+	if err := r.Get(ctx, req.NamespacedName, &reproObj); err != nil {
+
+		debugLog.Printf(" didnt find %s \n", req.NamespacedName)
+		return ctrl.Result{}, nil
+	}
+
+	debugLog.Printf(" Processing CR %s pod %s \n", reproObj.Name, reproObj.Spec.Graph.Pod.ObjectMeta.Name)
 
 	return ctrl.Result{}, nil
 }
